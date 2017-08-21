@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %msg%n"/>
+        </Console>
+
+        <RollingRandomAccessFile name="RollingFile"
+                                 fileName="log/report/connection.log"
+                                 filePattern="log/report/$${date:yyyy-MM-dd}/app-%d{yyyy-MM-dd HH}-%i.log"
+                                 append="false">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="9000 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+
+    </appenders>
+
+
+    <loggers>
+        <Logger name="connection" level="trace" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile"/>
+        </Logger>
+
+
+    </loggers>
+</configuration>
