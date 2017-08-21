@@ -43,6 +43,7 @@ public class ConsulServiceRegistry implements ServiceRegistry{
 
 	@Override
 	public void deregister(ServiceInstance instance) {
+		log.info("Deregistering service with consul: " + instance.getServiceId());
 		consulClient.agentServiceDeregister(instance.getServiceId());
 	}
 
